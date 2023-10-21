@@ -1,0 +1,17 @@
+name: 'Terraform for cf-bbprogram'
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+# on: [push]
+
+# permissions:
+#   contents: read
+
+jobs:
+  terraform-bbprogram:
+    uses: asman-go/github-cicd/.github/workflows/terraform.yml@main
+    with:
+      terraform_folder: deploy
+    secrets: inherit
