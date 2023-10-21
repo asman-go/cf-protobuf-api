@@ -11,14 +11,6 @@ on: [push]
 
 jobs:
   terraform-bbprogram:
-    name: 'Run terraform for cf-bbprogram'
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        shell: bash
-
-    steps:
-      uses: asman-go/github-cicd/.github/workflows/terraform.yaml@main
-      with:
-        terraform_folder: deploy
+    uses: asman-go/github-cicd/.github/workflows/terraform.yaml@main
+    with:
+      terraform_folder: deploy
