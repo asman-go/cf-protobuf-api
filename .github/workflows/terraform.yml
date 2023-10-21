@@ -14,17 +14,25 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
+    env:
+      # Где лежат конфигурации в Github-репозитории
+      terraform_folder: deploy
 
     defaults:
       run:
         shell: bash
-    
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-    - name: LS
-      run: ls -al
+      uses: hashicorp/setup-terraform@v2
     - name: Terraform Init
-      run: terraform -chdir=deploy init
+      run: terraform -chdir=$terraform_folder init
+    - name: Terraform Format
+      run: terraform -chdir=$terraform_folder fmt -check
+    - name: Terraform Plan
+      run: terraform -chdir=$terraform_folder plan -input=false
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/$default-branch' && github.event_name == 'push'
+      run: terraform -chdir=$terraform_folder apply -auto-approve -input=false
