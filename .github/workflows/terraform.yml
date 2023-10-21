@@ -1,10 +1,10 @@
 name: 'Terraform for cf-bbprogram'
 
-# on:
-#   push:
-#     branches: ["main"]
-#   pull_request:
-on: [push]
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+# on: [push]
 
 # permissions:
 #   contents: read
