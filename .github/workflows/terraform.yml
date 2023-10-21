@@ -26,7 +26,5 @@ jobs:
       uses: hashicorp/setup-terraform@v1
     - name: LS
       run: ls -al
-    - name: CD
-      run: cd deploy
     - name: Terraform Init
-      run: terraform init
+      run: terraform -chdir=deploy init
