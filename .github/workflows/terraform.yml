@@ -11,6 +11,6 @@ on: [push]
 
 jobs:
   terraform-bbprogram:
-    uses: asman-go/github-cicd/.github/workflows/terraform.yaml@main
+    uses: asman-go/github-cicd/.github/workflows/terraform.yml@main
     with:
       terraform_folder: deploy
