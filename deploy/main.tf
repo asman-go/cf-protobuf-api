@@ -1,19 +1,3 @@
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-
-  required_version = ">= 0.13"
-}
-
-provider "yandex" {
-  cloud_id  = "b1g2amdfmrmrjn7ci2rm"
-  folder_id = "b1gr7b87128mt4levqg1"
-  zone      = "ru-central1-a"
-}
-
 data "archive_file" "cf-archive" {
   type        = "zip"
   source_dir  = "${path.module}/../src"
