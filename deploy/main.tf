@@ -1,22 +1,19 @@
-data "yandex_resourcemanager_cloud" "cloud" {
-  name = var.cloud
+data "archive_file" "cf-archive" {
+  type        = "zip"
+  source_dir  = "${path.module}/../src"
+  output_path = "${path.module}/../cf-bbprogram.zip"
 }
 
-data "yandex_resourcemanager_folder" "folder" {
-  name = var.folder
-}
+resource "yandex_function" "cf-bbprogram" {
+  name              = "cf-bbprogram"
+  description       = "Upload bb program information"
+  user_hash         = data.archive_file.cf-archive.output_base64sha256 # Должна меняться, иначе версия функции не создастся
+  runtime           = "python311"
+  entrypoint        = "main.event_handler"
+  memory            = "128" # 128 MB
+  execution_timeout = "10"  # 10 seconds
 
-provider "yandex" {
-  alias = "with-project-info"
-
-  cloud_id  = data.yandex_resourcemanager_cloud.cloud.id
-  folder_id = data.yandex_resourcemanager_folder.folder.id
-}
-
-module "terraform-main" {
-  source = "./main"
-
-  providers = {
-    yandex = yandex.with-project-info
+  content {
+    zip_filename = data.archive_file.cf-archive.output_path
   }
 }
