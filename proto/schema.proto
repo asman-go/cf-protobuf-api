@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package asman.cloudfunction.bbprogram;
+
+enum AssetType {
+    ASSET_OTHER = 0;
+
+    ASSET_DOMAIN = 1;
+    ASSET_WILDCARD_DOMAIN = 2;
+    ASSET_HOST = 3;
+    ASSET_SUBNET = 4;
+    ASSET_MOBILE = 5;
+}
+
+message Asset {
+    AssetType type = 1;
+    string value = 2;
+    bool is_paid = 3;
+}
+
+message NewProgramRequest {
+
+    string program_name = 1;
+    string program_site = 2;
+    string platform = 3;
+
+    repeated Asset in_scope = 4;
+    repeated Asset out_of_scope = 5;
+
+    string notes = 6;
+}
