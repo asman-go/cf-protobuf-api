@@ -1,4 +1,5 @@
-# cf-bbprogram
+# Cloud function with Protobuf API
 
-Endpoint collects bug bounty program information. Based on Cloud Functions
-x
+Endpoint receive the proto message like request. Based on Cloud Functions.
+
+client: https://github.com/IkeMurami-Examples/grpc-python-client-example
